@@ -1,0 +1,62 @@
+* {
+	margin: 0;
+	padding: 0;
+ }
+
+body {
+	color: #fff;
+	margin: 0;
+	padding: 0;
+	background-image: url("../img/blue-butterfly.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;	
+}
+
+h1{
+	margin: 2rem;
+	color: #00ffff;
+	text-shadow: #f4f4f4 0px 10px 5px;
+}
+
+.center {
+	
+	display: flex;
+	align-item: center;
+	justify-content: center;
+}
+
+/*nav bar*/
+nav {
+	background-color: #000;
+	overflow: hidden;
+	height: 4rem;
+	opacity: 0.9;
+	border-bottom: 1px solid #fff;
+}
+
+nav .navbar {
+	margin-left: 10px;
+}
+
+nav .navbar li{
+	list-style-type: none;
+}
+
+nav .navbar .navcontent a {
+	float: left;	
+	display: block;
+	text-align: center;
+	padding: 14px 14px;
+	margin: 5px 4px;
+	color: #000fff;
+	border-radius: 5px;
+	text-decoration: none;
+	border: #000fff solid 2px;
+}
+
+nav .navbar .navcontent a:hover {
+	background: #fff;
+	color: #000;
+	border: #333 solid 2px;
+	box-shadow: #f4f4f4 5px 5px 1px;
+}

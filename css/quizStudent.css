@@ -1,0 +1,31 @@
+table {
+	width: 100vw;	
+	border: #333 solid 5px;
+	margin-top: 2rem;
+	margin: auto;
+}
+
+td {
+	border: #999 solid 1px;
+	padding: 1px;
+	text-align: center;
+	width: 50vw;
+}
+
+input {
+	font-size: 1.75rem;
+	width: 13rem;
+	height: 1.5rem;
+	margin-right: 3px;
+}
+
+.btn {
+	text-decoration: none;
+	color: #888;
+	text-align: center;
+}
+
+.btn:hover {
+	color: #ff0000;
+}
+
