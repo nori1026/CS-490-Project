@@ -267,6 +267,7 @@ function addQuestion(event) {
   	xhr.onload = function() {
       		console.log(this.responseText);	
       		console.log('DONE', xhr.status);
+//		questionBank();
 	};
 	
 	xhr.open("POST", "addQuestion.php");
@@ -274,8 +275,7 @@ function addQuestion(event) {
 	//xhr.send(`question=${question.value}&testCase=${testCase.value}&answer=${answer.value}&difficulty=${difficulty.value}`);
 	xhr.send("question="+question.value+"&parameter="+parameter.value+"&retVal="+retVal.value+"&printVal="+printVal.value+"&difficulty="+difficulty.value+"&topic="+topic.value+"&testCase="+testCase.value);
 	
-	
-
+	window.location.reload();
 }
 
 //interval of id and score by professor in array.

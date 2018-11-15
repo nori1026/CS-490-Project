@@ -5,11 +5,11 @@ var string = encodeURIComponent('+');
 let submitBtn = document.createElement('button');
 submitBtn.setAttribute('type', 'submit');
 const storage = document.querySelector('form');
-let answerSection;
 let fullArray;
 let lenQuestion = 0;
 let testArray = [];
-
+let temp;
+let arraySub = [];
 
 submitBtn.addEventListener('click', submitExam);
 console.log('working now');
@@ -60,19 +60,28 @@ function getTest() {
 		});
 	
 		fullArray = arrayContainer;
-
 		let testQuestionArray = [];
 		
-		let temp = 0;
+		temp = 0;
 		let num
 		console.log(fullArray);
 		fullArray.forEach( i=>{
 			num = parseInt(i[0]);
+			
 			if(num > temp){
-				temp = num;
+				temp = num;	
 			}
 		});
-		console.log(temp);
+
+		fullArray.forEach(i => {
+			if(temp == i[0]){
+				arraySub.push(i);
+			}
+		});
+
+		fullArray = arraySub;
+
+		console.log(arraySub);
 
 		if(fullArray.length != 1 && !isNaN(parseInt(fullArray[0]))){	
 	
@@ -98,6 +107,7 @@ function getTest() {
 				topSection = document.createElement('h4');
 				description = document.createElement('p');
 				
+				inputBox.id = "texts";
 				let choice = (array[8] != "")  ? array[8] : '20';
 				topSection.innerHTML = "<br>Points: " + choice + '<br>' + array[9];
 				description.innerHTML = "Function:" + array[3] + '<br>' 
@@ -109,7 +119,6 @@ function getTest() {
 				inputBox.cols = "80"
 
 			});
-			
 
 			storage.appendChild(topSection);
 			storage.appendChild(description)
@@ -124,7 +133,6 @@ function getTest() {
 		storage.appendChild(submitBtn);
 		testArray.push(storage);
 	}
-
 	xhr.open("GET", "getTest.php");
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send();
@@ -137,17 +145,19 @@ function submitExam(e) {
 	let allArray = []	
 	let instructor = fullArray[0][1];
 	count = 0;
-	answerSection = document.querySelectorAll('textarea');
 	questionSection = document.querySelectorAll('.questions');
 	//get question id from array result and comment placeholder
-	console.log(fullArray[0][1]);	
+	let answerSection = document.querySelectorAll("#texts");
 
+	console.log(arraySub);	
 	fullArray.forEach(i => {
-		let tempArray = []
-		console.log(answerSection[0].values);
-		tempArray.push(answerSection[count].value);
-		allArray.push(tempArray);
-		count++;
+		let tempArray = [];
+			if(i[0] == temp){
+			console.log("hello");
+			tempArray.push(answerSection[count].value);
+			allArray.push(tempArray);
+			count++;
+		}
 	});
 
 	let arr = [];
@@ -170,7 +180,8 @@ function submitExam(e) {
 	fullArray.forEach(i => {
 		i.shift();
 	});
-
+	
+	console.log(allArray);
 	fullArray.forEach( i => {
 		console.log(i);
 		i.forEach( j => {

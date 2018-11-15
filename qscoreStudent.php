@@ -24,5 +24,5 @@
 		
 	<div class="container"></div>
 </body>
-<script src="js/studentScore.js"></script>
+<script src="js/studentsScore.js"></script>
 </html>
