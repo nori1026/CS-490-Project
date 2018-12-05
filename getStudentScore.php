@@ -3,9 +3,11 @@ session_start();
 //get test student
 
 $user = $_SESSION['gid'];
+$score = $_POST['score'];
+$comment = $_POST['comment'];
 
 $data = array(
-	'user' => rawurlencode($user)
+	'user' => 'S'
 );
 
 foreach($data as $key=>$value) { $data_string .= $key.'='.$value.'&'; }
@@ -13,7 +15,7 @@ rtrim($data_string, '&');
 
 $curl=curl_init();
 
-curl_setopt($curl, CURLOPT_URL, "https://web.njit.edu/~nvs29/StudentsTests.php");//ka293
+curl_setopt($curl, CURLOPT_URL, "https://web.njit.edu/~nvs29/ReviewExams.php");//ka293
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_FOLLOWLOCATION, TRUE);
 curl_setopt($curl, CURLOPT_POST, count($data));

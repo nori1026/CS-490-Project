@@ -1,19 +1,18 @@
 <?php
 session_start();
 //get test student
-/*
+
 $user = $_SESSION['gid'];
 $score = $_POST['score'];
 $comment = $_POST['comment'];
 
 $data = array(
-	'testScore' => urlencode($score),
-	'profComment' => urlencode($comment)
+	'user' => 'P'
 );
 
 foreach($data as $key=>$value) { $data_string .= $key.'='.$value.'&'; }
 rtrim($data_string, '&');
-*/
+
 $curl=curl_init();
 
 curl_setopt($curl, CURLOPT_URL, "https://web.njit.edu/~nvs29/ReviewExams.php");//ka293

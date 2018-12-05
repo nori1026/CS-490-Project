@@ -6,8 +6,8 @@
 	<meta name="viewport" content="width=device-width,
 		initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="css/prof.css">
-	<link rel="stylesheet" href="css/quizProfessors.css">
+	<link rel="stylesheet" href="css/professor.css">
+	<link rel="stylesheet" href="css/quizProfessor.css">
 	<title>My homepage</title>
 </head>
 
@@ -17,7 +17,7 @@
 			<li class="this navcontent"><a href="professor.php" id="home">Home</a></li>
 			<li class="navcontent"><a href="testProf.php" id="test">Test</a></li>
 			<li class="navcontent"><a href="scoreProf.php" id="score">Score</a></li>
-	
+			<li class="navcontent"><a href="https://web.njit.edu/~njo3/">Logout</a></li>
 		</ul>
 	</nav>
 	<!--		
@@ -33,5 +33,5 @@
 	-->
 	<div class="container"></div>
 </body>
-<script src="js/scoreProfs.js"></script>
+<script src="js/scoreProf.js"></script>
 </html>

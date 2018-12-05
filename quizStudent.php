@@ -7,7 +7,7 @@
 		initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="css/student.css">
-	<link rel="stylesheet" href="css/studentTests.css">
+	<link rel="stylesheet" href="css/studentsTest.css">
 	<title>My homepage</title>
 </head>
 
@@ -17,7 +17,8 @@
 			<li class="this navcontent"><a href="student.php" id="home">Home</a></li>
 			<li class="navcontent"><a href="quizStudent.php" id="test">Test</a></li>
 			<li class="navcontent"><a href="qscoreStudent.php" id="score">Score</a></li>
-	
+			<li class="navcontent"><a href="https://web.njit.edu/~njo3/">Logout</a></li>
+ 
 		</ul>
 	</nav>
 	<h1>Student Test Page</h1>	
@@ -25,5 +26,5 @@
 	<h3 id="submitted"></h3>
 
 </body>
-<script src="js/studentsTest.js"></script>
+<script src="js/studentTest.js"></script>
 </html>

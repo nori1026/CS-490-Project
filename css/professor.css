@@ -4,9 +4,10 @@
  }
 
 body {
+	color: #fff;
 	margin: 0;
 	padding: 0;
-	background: #fffdd0;
+	background-color: #fffdd0;
 	background-size: cover;	
 }
 
@@ -20,10 +21,6 @@ h1{
 	display: flex;
 	align-item: center;
 	justify-content: center;
-}
-
-h3{
-	text-align: center;
 }
 
 /*nav bar*/
@@ -49,10 +46,10 @@ nav .navbar .navcontent a {
 	text-align: center;
 	padding: 14px 14px;
 	margin: 5px 4px;
-	color: #f4f4f4;
+	color: #fffdd0;
 	border-radius: 5px;
 	text-decoration: none;
-	border: #f4f4f4 solid 2px;
+	border: #fffdd0 solid 2px;
 }
 
 nav .navbar .navcontent a:hover {

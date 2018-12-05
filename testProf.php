@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width,
 		initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="css/professor.css">
 	<link rel="stylesheet" href="css/testMake.css">
 	<title>My homepage</title>
 </head>
@@ -32,17 +33,10 @@
 				</div>
 
 				<div class="center">
-					<label>and returns: </label><br><br>
+					<label>Question description: </label><br><br>
 				</div>
 				<div class="center">
 					<input id="retVal"></input>
-				</div>
-
-				<div class="center">
-					<label>and prints:</label>
-				</div>
-				<div class="center">
-					<input id="printVal"></input>
 				</div>
 				
 				<div class="center">Difficulty: </div>
@@ -80,6 +74,7 @@
 				<li class="this navcontent"><a href="professor.php" id="home">Home</a></li>
 				<li class="navcontent"><a href="testProf.php" id="test">Test</a></li>
 				<li class="navcontent"><a href="scoreProf.php" id="score">Score</a></li>
+				<li class="navcontent"><a href="https://web.njit.edu/~njo3/">Logout</a></li>
 			</ul>
 		</nav>
 		
@@ -108,7 +103,7 @@
 		<div class="halves">
 			<ul>
 				<li class="addItem diffsize"> 
-					<h1>+</h1>
+					<h2>+</h2>
 				</li>
 			</ul>
 			<ul class="addList" id="first">
@@ -117,5 +112,5 @@
 			</ul>
 		</div>
 </body>
-<script src="js/testsMake.js"></script>
+<script src="js/testMake.js"></script>
 </html>

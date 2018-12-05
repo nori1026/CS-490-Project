@@ -8,7 +8,7 @@ let studentId;
 let srcArray = [];
 let arrayLines = [];
 
-console.log("it is no  works");
+console.log("it  works");
 
 //utility function for checking which color to choose per sign, func colorChec
 function determColor(colorCode, elem){
@@ -153,8 +153,12 @@ function getScore(){
 		console.log(srcArray);
 		lenFilter = srcArray.length;
 		if(arrayQuestion[0] != "null"){
-
 		
+		let t = document.createElement('h2');
+		t.innerHTML = "Professor Test Edit Page";
+		t.style.color = "black";
+		t.style.margin = "1rem";
+		container.appendChild(t);
 		while(lenFilter){
 			console.log(lenFilter);	
 			
@@ -218,7 +222,6 @@ function getScore(){
 					let cover = document.createElement('div');
 					cover.className = "eachLine";
 					let inputOne = document.createElement('input');
-					inputOne.disabled = "true";
 					inputOne.className = "points";
 					inputOne.type="text";
 					inputOne.value = i;
@@ -236,7 +239,6 @@ function getScore(){
 				
 
 				inputTwo.value = questionItem[6];
-				inputTwo.disabled = "true";
 				inputTwo.style.fontSize = "12px";
 				inputTwo.rows = "5";
 				inputTwo.cols = "5";
@@ -260,6 +262,13 @@ function getScore(){
 			
 		}
 		}
+		let submit = document.createElement('button');
+		submit.innerHTML = "Button";
+		submit.className = "btn";
+		submit.style.display = "block";
+		submit.style.margin = "auto";
+		container.appendChild(submit);
+		submit.addEventListener('click', sendScore);
 	
 	//Nested array of table and its input, array of table and array of each line.
 	console.log(document.querySelectorAll('.boxOne')[0]);
@@ -270,5 +279,46 @@ function getScore(){
 	xhr.open("POST", "getScore.php", true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send();
+}
+
+function sendScore(){
+	let xhc = new XMLHttpRequest();
+
+	xhc.onload = function(){
+		console.log(xhc.responseText);
+	};
+
+	let newItem =  document.querySelectorAll('.boxOne'); //array of td
+	let score = document.querySelectorAll('.grade');
+	
+	console.log(arrayLines);
+
+	let feedback = "";
+	let k = 0;
+	arrayLines.forEach( i => {
+		feedback += studentId + "~" + questionidArray[k] + "~"; 
+		console.log(i);
+		i.forEach( j => {
+			feedback += j + " "; 
+		});
+		console.log(score[k]);
+		feedback += "~" + score[k].value + ";";
+		k = k+1;
+	});
+
+	
+
+	console.log(feedback);
+	
+	//let feedback = comment.value + "~" + score.value;	
+	
+	xhc.open("POST", "sendScore.php", true);
+	xhc.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhc.send("feedback=" + feedback);
+	let parentNode = document.querySelector('.container');
+	while(parentNode.firstChild){
+		parentNode.removeChild(parentNode.firstChild);
+	}
+	parentNode.innerHTML= "Submitted Successfully";
 }
 

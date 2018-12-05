@@ -18,7 +18,8 @@
 			<li class="this navcontent"><a href="student.php" id="home">Home</a></li>
 			<li class="navcontent"><a href="quizStudent.php" id="test">Test</a></li>
 			<li class="navcontent"><a href="qscoreStudent.php" id="score">Score</a></li>
-	
+ 			<li class="navcontent"><a href="https://web.njit.edu/~njo3/">Logout</a></li>
+
 		</ul>
 	</nav>
 		

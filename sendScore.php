@@ -1,6 +1,6 @@
 <?php
 session_start();
-//get test student
+//send test professor
 
 $user = $_SESSION['gid'];
 $feedback = $_POST['feedback'];
