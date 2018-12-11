@@ -1,14 +1,18 @@
 
 getScore();
 
+let inputOne;
 let commentId = [];
 let scoreId = [];
 let questionidArray = [];
 let studentId;
 let srcArray = [];
 let arrayLines = [];
+let countId = 0;
+let arrayId = [];
+let colorArray = []
 
-console.log("it  works");
+console.log("This works");
 
 //utility function for checking which color to choose per sign, func colorChec
 function determColor(colorCode, elem){
@@ -39,6 +43,8 @@ function colorCheck(elem, count, array){
 		elem.value = item.substring(0, item.length-1);
 		//array[count] = elem.value;
 		determColor(colorCode, elem);
+		colorArray.push(colorCode);
+		arrayId.push(elem);
 	}
 	
 }
@@ -57,7 +63,6 @@ function getScore(){
 		//split response into array
 		console.log(typeof(res));
 		let arrayQuestion = res.slice(12).split(";");
-		
 		let subarray = [];
 		let infoarray = []
 		
@@ -155,7 +160,7 @@ function getScore(){
 		if(arrayQuestion[0] != "null"){
 		
 		let t = document.createElement('h2');
-		t.innerHTML = "Student Test Score";
+		t.innerHTML = "Professor Test Edit Page";
 		t.style.color = "black";
 		t.style.margin = "1rem";
 		container.appendChild(t);
@@ -197,17 +202,17 @@ function getScore(){
 				inputTwo = document.createElement('input');
 				inputTwo.className = "grade";
 
-				console.log(questionItem[7]);//7 before
+				console.log(questionItem);//7 before
 				let innerCont = questionItem[7].split('\n');
-				console.log(innerCont);
 				//temp comment
-				//innerCont.shift();
+				innerCont.shift();
 				innerCont.pop();
 				
 
 				arrayLines.push(innerCont);
-				console.log(innerCont);
+				
 				let numLoop = 0;
+				
 				if(innerCont.length == 0){
 					let inputOne = document.createElement('input');
 					inputOne.className = "points";
@@ -216,22 +221,22 @@ function getScore(){
 					inputOne.fontSize = "12px";
 					tableComment.appendChild(inputOne);
 				}
-
+				console.log(innerCont);
 				innerCont.forEach( i => {
 					console.log(i)
 					let cover = document.createElement('div');
 					cover.className = "eachLine";
-					let inputOne = document.createElement('input');
+					inputOne = document.createElement('input');
 					inputOne.className = "points";
 					inputOne.type="text";
 					inputOne.value = i;
-					inputOne.readOnly = "true";
 					inputOne.style.width = "700px";
 					inputOne.style.fontSize = "12px";
 					cover.appendChild(inputOne);
-					
+					countId+=1;	
 					tableComment.appendChild(inputOne);
 					colorCheck(inputOne, numLoop, innerCont);///	
+					inputOne.id = "\\" + countId;
 					numLoop += 1;
 
 					}
@@ -263,6 +268,13 @@ function getScore(){
 			
 		}
 		}
+		let submit = document.createElement('button');
+		submit.innerHTML = "Button";
+		submit.className = "btn";
+		submit.style.display = "block";
+		submit.style.margin = "auto";
+		container.appendChild(submit);
+		submit.addEventListener('click', sendScore);
 	
 	//Nested array of table and its input, array of table and array of each line.
 	console.log(document.querySelectorAll('.boxOne')[0]);
@@ -270,8 +282,52 @@ function getScore(){
 
 	
 
-	xhr.open("POST", "getStudentScore.php" , true);
+	xhr.open("POST", "getScore.php", true);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send();
+}
+
+function sendScore(){
+	let xhc = new XMLHttpRequest();
+
+	xhc.onload = function(){
+		console.log(xhc.responseText);
+	};
+
+	let newItem =  document.querySelectorAll('.boxOne'); //array of td
+	let score = document.querySelectorAll('.grade');
+	
+	console.log(arrayLines);
+
+	let feedback = "";
+	let k = 0;
+	let z = 0;
+	console.log(colorArray);
+	arrayLines.forEach( i => {
+		feedback += studentId + "~" + questionidArray[k] + "~"; 
+		console.log(i);
+		i.forEach( j => {
+			feedback += arrayId[z].value + colorArray[z] + "\n "; 
+			z+=1;
+		});
+		console.log(score[k]);
+		feedback += "~" + score[k].value + ";";
+		k = k+1;
+	});
+
+	console.log(arrayId[0].value);
+
+	console.log(feedback);
+	
+	//let feedback = comment.value + "~" + score.value;	
+	
+	xhc.open("POST", "sendScore.php", true);
+	xhc.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhc.send("feedback=" + feedback);
+	let parentNode = document.querySelector('.container');
+	while(parentNode.firstChild){
+		parentNode.removeChild(parentNode.firstChild);
+	}
+	parentNode.innerHTML= "Submitted Successfully";
 }
 

@@ -19,7 +19,7 @@ let diffChoice = document.querySelector('#diffChoice');
 
 const question = document.querySelector('#Question');
 const retVal = document.querySelector('#retVal');
-const printVal = document.querySelector('#printVal');
+//const printVal = document.querySelector('#printVal');
 const parameter = document.querySelector('#parameter');
 const difficulty = document.querySelector('#difficulty');
 const topic = document.querySelector("#topic");
@@ -51,7 +51,7 @@ topicChoice.addEventListener('change', sortQuestion);
 diffChoice.addEventListener('change', sortQuestion);
 
 //curl to addTest
-console.log("working2");
+console.log("is working");
 // modal
 function setVisible() {
 	modalcontainer.style.display = "block";	
@@ -74,7 +74,7 @@ function questionBank() {
 	xhr.onload = function() {
 		console.log('DONE', xhr.status);
 		let response = xhr.response;
-		
+		console.log(response);	
 		let subarray = []
 		let arrayQuestion = response.split(';');
 		arrayQuestion.forEach(i => {
@@ -113,7 +113,7 @@ function questionBank() {
 				arrayQuestion.shift();
 			}
 		}
-
+		console.log(arrayContainer);
 		/*singleArray.push(arrayQuestion.shift());
 		singleArray.push(arrayQuestion.shift());	
 		singleArray.push(arrayQuestion.shift());
@@ -126,36 +126,62 @@ function questionBank() {
 		arrayContainer.push(singleArray);
 		singleArray = [];*/
 
+		let dupe = []
+		let nn;
 		arrayContainer.forEach( array => {
+			let used = [];
+			nn = 0;
+			console.log(array);
+			array.forEach( item => {
+				if((array[2] == item && nn == 2)
+				|| (array[3] == item && nn == 3)
+				|| (array[4] == item && nn == 4)
+				|| (array[5] == item && nn == 5)
+				|| (array[7] == item && nn == 7)
+				|| (array[8] == item && nn == 8)){
+					console.log(array[8]);
+					used.push(item);
+				}
+				nn += 1;
+			});
+			dupe.push(used);
+		});
+		console.log(dupe);
+
+		let checkbox;
+		dupe.forEach( array => {
 			let rectangle = document.createElement('li');
 			rectangle.className = "addItem center";
+			rectangle.draggable = "true";
 			let table = document.createElement('table');
 			let tr = document.createElement('tr');
 			let td;
 			let i=0;
 
-			
-	
 			checkbox = document.createElement("input");
 		        checkbox.type = "checkbox";
 		        checkbox.style.display = "inline";
 			checkbox.checked = false;
 
-
-			array.forEach( item =>{
-				td = document.createElement('td');
-				td.innerHTML = item;
-				tr.appendChild(td);
-			});
+			//2,3,4,#5#,7,8
 			
-
+			//let removed = array.splice(2, 1);
+			//array.unshift(removed[0]);
+			console.log(array);
+			array.forEach( item =>{	
+					td = document.createElement('td');
+					td.innerHTML = item;
+					tr.appendChild(td);
+			});
+		
+			
 
 			table.appendChild(tr);	
 			rectangle.appendChild(checkbox);
 			rectangle.appendChild(table);
 			listLeft.push(rectangle);
 			rectangle.style.top = "" + counter + "rem";
-			counter += 30;
+			//counter += 30;
 			halves.style.height = "" + container +"vh";
 			container += 54;
 			firstList.style.height = "" + height + "vh";
@@ -163,7 +189,8 @@ function questionBank() {
 			height += 48;
 			firstList.appendChild(rectangle);
 		});
-	}
+	
+	}//end of xhr.onload
 	
 	xhr.open("POST", "questionBank.php");
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -177,15 +204,15 @@ function questionBank() {
 
 let table;
 let row;
-let questID;
-let uid;
+//let questID;
+//let uid;
 let questionData;
 let paraData;
 let retData;
-let printData;
+//let printData;
 let diff;
 let topicData;
-let testCaseData;
+//let testCaseData;
 let qID = 1;
 let idContainer = [];
 
@@ -193,6 +220,8 @@ let idContainer = [];
 
 //also add checker and move whichever item/question is checked
 function addQuestion(event) {
+	let newItemArray = [];
+
 	event.preventDefault();
 	setInvisible();
 
@@ -222,33 +251,43 @@ function addQuestion(event) {
 	
 		
 	row = document.createElement("tr");
-	questID = document.createElement("td");
-	uid = document.createElement("td");
+	//questID = document.createElement("td");
+	//uid = document.createElement("td");
 	questionData = document.createElement("td");
 	paraData = document.createElement("td");
 	retData = document.createElement("td");
-	printData = document.createElement("td");
+	//printData = document.createElement("td");
 	diff = document.createElement("td");
 	topicData = document.createElement("td");
-	testCaseData = document.createElement("td");
+	//testCaseData = document.createElement("td");
 
-	questID.innerHTML = currentQID;
-	uid.innerHTML = "njo3"; //for now, replace with proper id later.
+	newItemArray.push(currentQID);
+	newItemArray.push("njo3");
+	newItemArray.push(question.value);
+	newItemArray.push(parameter.value);
+	newItemArray.push(retVal.value);
+	//newItemArray.push(printVal.value);
+	newItemArray.push(difficulty.value);
+	newItemArray.push(topic.value);
+	newItemArray.push(testCase.value);
+
+	//questID.innerHTML = currentQID;
+	//uid.innerHTML = "njo3"; //for now, replace with proper id later.
 	question.innerHTML = question.value;
 	paraData.innerHTML = parameter.value;
 	retData.innerHTML = retVal.value;
-	printData.innerHTML = printVal.value;
+	//printData.innerHTML = printVal.value;
 	diff.innerHTML = difficulty.value;
 	topicData.innerHTML = topic.value;
-	testCaseData.innerHTML = testCase.value;
+	//testCaseData.innerHTML = testCase.value;
 
-	row.appendChild(questID);
-	row.appendChild(uid);
+	//row.appendChild(questID);
+	//row.appendChild(uid);
 	row.appendChild(questionData);
 	row.appendChild(paraData);
 	row.appendChild(retData);
-	row.appendChild(printData);
-	row.appendChild(testCaseData);
+	//row.appendChild(printData);
+	//row.appendChild(testCaseData);
 	row.appendChild(diff);
 	row.appendChild(topicData);
 
@@ -263,19 +302,20 @@ function addQuestion(event) {
 //console.log( question.value + " " +parameter.value + " " + testCase.value + " " + difficulty.value);	
 	
 	const xhr = new XMLHttpRequest();
-	console.log("Working");
+	content = newItemArray;
+	console.log(content);
   	xhr.onload = function() {
       		console.log(this.responseText);	
       		console.log('DONE', xhr.status);
-//		questionBank();
+		console.log(content);
 	};
 	
 	xhr.open("POST", "addQuestion.php");
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	//xhr.send(`question=${question.value}&testCase=${testCase.value}&answer=${answer.value}&difficulty=${difficulty.value}`);
-	xhr.send("question="+question.value+"&parameter="+parameter.value+"&retVal="+retVal.value+"&printVal="+printVal.value+"&difficulty="+difficulty.value+"&topic="+topic.value+"&testCase="+testCase.value);
 	
-	window.location.reload();
+	xhr.send("question="+content[2]+"&parameter="+content[3]+"&retVal="+content[4]+"&difficulty="+content[5]+"&topic="+content[6]+"&testCase="+content[7]);
+	
+	//window.location.reload();
 }
 
 //interval of id and score by professor in array.
@@ -286,6 +326,7 @@ function makeTest() {
 	//loop through content of second list's input box
 	scoreMod = [];
 	listRight.forEach(i=>{
+		console.log(i.childNodes[2].value);
 		scoreMod.push(i.childNodes[2].value);
 	});
 	//send score for each question as string
@@ -301,7 +342,7 @@ function makeTest() {
 	xhr.open("POST", "makeTest.php");
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	
-	let newString = ""
+	let newString = "";
 	arrayID.forEach(i => {
 		newString += i+",";
 		newString += scoreMod.shift()+";";
@@ -324,12 +365,26 @@ function moveChecked() {
 	listContent.forEach(i => {
 
 		if(i.checked){
-			i.disabled = true;	
+			i.disabled = true;
+			i.style.opacity = "0";
 			console.log("Moving to second list");
+			/*	
 			if(!arrayID.includes(i.parentNode.childNodes[1].childNodes[0].childNodes[0].textContent)){
-				console.log(i.parentNode.childNodes[1].childNodes[0].childNodes[0]);
+				console.log(i.parentNode.childNodes[1].childNodes[0].childNodes[1]);
 				arrayID.push(i.parentNode.childNodes[1].childNodes[0].childNodes[0].textContent);
 			}
+			*/
+			arrayContainer.forEach( j => {
+				if(j[2] == i.parentNode.childNodes[1].childNodes[0].childNodes[0].textContent
+				&& j[3] == i.parentNode.childNodes[1].childNodes[0].childNodes[1].textContent
+				&& j[4] ==i.parentNode.childNodes[1].childNodes[0].childNodes[2].textContent
+				&& j[5] ==i.parentNode.childNodes[1].childNodes[0].childNodes[3].textContent
+				&& j[7] ==i.parentNode.childNodes[1].childNodes[0].childNodes[4].textContent
+				&& j[8] ==i.parentNode.childNodes[1].childNodes[0].childNodes[5].textContent){
+					arrayID.push(j[0]);	
+				}
+			});
+			
 			score = document.createElement('input');
 			placeholdList = i.parentNode;
 			placeholdList.id = num;
@@ -351,7 +406,7 @@ function moveChecked() {
 		container += 50;
 		secondList.style.height = "" + height + "vh";
 		
-		//console.log(listRight);
+		console.log(listRight);
 		
 	});
 
@@ -368,26 +423,34 @@ function sortQuestion(event){
 	console.log("topicChoice: " + topicChoice.value);
 	newList = [];
 	
+	let containerCount = 0;
+	console.log(arrayContainer);
 	//listLeft contains html from data bank
 	listLeft.forEach( i =>{
-		//selected difficulty
-		let itemTopic = i.childNodes[1].childNodes[0].childNodes[8].innerHTML;
-		//delected topic
-		let itemDiff = i.childNodes[1].childNodes[0].childNodes[7].innerHTML;
-		
-		//console.log("Two item: " + itemDiff + " "  + itemTopic);
 
-		if((event.target.value === itemDiff && topicChoice.value == itemTopic) 
+		console.log(arrayContainer[containerCount][7] + " " + arrayContainer[containerCount][8]);
+
+		//selected difficulty
+		//let itemTopic = i.childNodes[1].childNodes[0].childNodes[4].innerHTML;
+		let itemTopic = arrayContainer[containerCount][8];
+		//selected topic
+		//let itemDiff = i.childNodes[1].childNodes[0].childNodes[5].innerHTML;
+		let itemDiff = arrayContainer[containerCount][7];
+		
+		console.log("Difference: " + itemDiff + " topic: " + itemTopic);
+
+		if((event.target.value == itemDiff && topicChoice.value == itemTopic) 
 			|| (event.target.value == itemTopic && diffChoice.value == itemDiff)
-			|| (event.target.value === "all" && itemDiff === diffChoice.value)
-			|| (event.target.value === "All" && itemTopic === topicChoice.value)
-			|| (event.target.value === itemTopic && "All" === diffChoice.value)
-			|| (event.target.value === itemDiff && "all" === topicChoice.value))
+			|| (event.target.value == "all" && itemDiff == diffChoice.value)
+			|| (event.target.value == "All" && itemTopic == topicChoice.value)
+			|| (event.target.value == itemTopic && "All" == diffChoice.value)
+			|| (event.target.value == itemDiff && "all" == topicChoice.value))
 		{
 			i.style.top = num+"rem";
 			newList.push(i);
 			num += 25;
 		}
+		containerCount += 1;
 	});
 	
 	

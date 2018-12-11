@@ -7,7 +7,7 @@
 		initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="css/professor.css">
-	<link rel="stylesheet" href="css/testMake.css">
+	<link rel="stylesheet" href="css/testsMake.css">
 	<title>My homepage</title>
 </head>
 
@@ -112,5 +112,5 @@
 			</ul>
 		</div>
 </body>
-<script src="js/testMake.js"></script>
+<script src="js/testsMake.js"></script>
 </html>

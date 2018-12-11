@@ -33,5 +33,5 @@
 	-->
 	<div class="container"></div>
 </body>
-<script src="js/scoreProf.js"></script>
+<script src="js/scoresProf.js"></script>
 </html>

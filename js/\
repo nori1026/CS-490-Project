@@ -155,7 +155,7 @@ function getScore(){
 		if(arrayQuestion[0] != "null"){
 		
 		let t = document.createElement('h2');
-		t.innerHTML = "Student Test Score";
+		t.innerHTML = "Professor Test Edit Page";
 		t.style.color = "black";
 		t.style.margin = "1rem";
 		container.appendChild(t);
@@ -197,11 +197,10 @@ function getScore(){
 				inputTwo = document.createElement('input');
 				inputTwo.className = "grade";
 
-				console.log(questionItem[7]);//7 before
+				console.log(questionItem);//7 before
 				let innerCont = questionItem[7].split('\n');
-				console.log(innerCont);
 				//temp comment
-				//innerCont.shift();
+				innerCont.shift();
 				innerCont.pop();
 				
 
@@ -225,7 +224,6 @@ function getScore(){
 					inputOne.className = "points";
 					inputOne.type="text";
 					inputOne.value = i;
-					inputOne.readOnly = "true";
 					inputOne.style.width = "700px";
 					inputOne.style.fontSize = "12px";
 					cover.appendChild(inputOne);
